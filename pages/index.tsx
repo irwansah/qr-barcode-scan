@@ -11,29 +11,36 @@ const Home = () => {
 
   return (
     <>
-      <div className="flex justify-center w-full md:w-1/2 m-auto">
-        <QrReader
-          constraints={{
-            facingMode: facingMode,
-            width: { ideal: 1280 },
-            height: { ideal: 720 },
-          }}
-          onResult={(result: any, error) => {
-            if (result) {
-              setData(result.text);
-            }
+      <div className="flex justify-center min-h-screen items-center place-items-center ">
+        <div className="w-full md:w-1/2 m-auto p-2">
+          <QrReader
+            constraints={{
+              facingMode: facingMode,
+              width: { ideal: 1280 },
+              height: { ideal: 720 },
+            }}
+            onResult={(result: any, error) => {
+              if (result) {
+                setData(result.text);
+              }
 
-            if (error) {
-              console.info(error);
-            }
-          }}
-          containerStyle={{ width: "100%" }}
-          videoContainerStyle={{ width: "100%" }}
-        />
-        <p className="absolute z-10 bg-black rounded-lg p-3 top-5">{data}</p>
-        <p className="absolute z-10 bg-black rounded-lg p-3 top-5 right-5">
-          <button onClick={() => handleSwitchCamera()}>Switch {facingMode}</button>
-        </p>
+              if (error) {
+                console.info(error);
+              }
+            }}
+            containerStyle={{ width: "100%" }}
+            videoContainerStyle={{ width: "100%" }}
+            className="rounded-lg overflow-hidden"
+          />
+          <p className="absolute bg-black rounded-lg p-3 md:top-5 top-[20%] left-5">
+            {data}
+          </p>
+          <p className="absolute bg-black rounded-lg p-3 md:top-5 top-[20%] right-5">
+            <button onClick={() => handleSwitchCamera()}>
+              Switch {facingMode}
+            </button>
+          </p>
+        </div>
       </div>
     </>
   );
