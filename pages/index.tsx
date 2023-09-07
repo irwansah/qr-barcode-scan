@@ -27,53 +27,53 @@ const Home = () => {
 
   return (
     <>
-      <div className="flex justify-center min-h-screen items-center place-items-center ">
-        <div className="w-full md:w-1/2 m-auto p-2">
+      <div className="flex justify-center items-center place-items-center ">
+        <div className="w-full md:w-1/2  m-auto p-2">
           <p className="relative bg-black rounded-lg p-3 text-center border w-full mb-3">
             {data}
           </p>
-          {typeof localStorage !== "undefined" &&
-          localStorage.getItem("facing") == "environtment" ? (
-            <QrReader
-              constraints={{
-                facingMode: mirrorEnv,
-                width: { ideal: 1280 },
-                height: { ideal: 720 },
-              }}
-              onResult={(result: any, error) => {
-                if (result) {
-                  setData(result.text);
-                }
+          <div className="max-h-[100px] rounded-lg overflow-hidden">
+            {typeof localStorage !== "undefined" &&
+            localStorage.getItem("facing") == "environtment" ? (
+              <QrReader
+                constraints={{
+                  facingMode: mirrorEnv,
+                  
+                }}
+                onResult={(result: any, error) => {
+                  if (result) {
+                    setData(result.text);
+                  }
 
-                if (error) {
-                  console.info(error);
-                }
-              }}
-              containerStyle={{ width: "100%" }}
-              videoContainerStyle={{ width: "100%" }}
-              className="rounded-lg overflow-hidden"
-            />
-          ) : (
-            <QrReader
-              constraints={{
-                facingMode: mirrorUser,
-                width: { ideal: 1280 },
-                height: { ideal: 720 },
-              }}
-              onResult={(result: any, error) => {
-                if (result) {
-                  setData(result.text);
-                }
+                  if (error) {
+                    console.info(error);
+                  }
+                }}
+                containerStyle={{ width: "100%" }}
+                videoContainerStyle={{ width: "100%" }}
+                className="rounded-lg overflow-hidden"
+              />
+            ) : (
+              <QrReader
+                constraints={{
+                  facingMode: mirrorUser,
+                 
+                }}
+                onResult={(result: any, error) => {
+                  if (result) {
+                    setData(result.text);
+                  }
 
-                if (error) {
-                  console.info(error);
-                }
-              }}
-              containerStyle={{ width: "100%" }}
-              videoContainerStyle={{ width: "100%" }}
-              className="rounded-lg overflow-hidden"
-            />
-          )}
+                  if (error) {
+                    console.info(error);
+                  }
+                }}
+                containerStyle={{ width: "100%" }}
+                videoContainerStyle={{ width: "100%" }}
+                className="rounded-lg overflow-hidden"
+              />
+            )}
+          </div>
           <p className="relative flex gap-2 justify-center bg-black rounded-lg p-3 text-center w-full mb-3">
             <button
               onClick={() => handleFace()}
