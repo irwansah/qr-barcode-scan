@@ -3,7 +3,7 @@ import { QrReader } from "react-qr-reader_multiformatreader";
 
 const Home = () => {
   const [data, setData] = useState("No result");
-  const [facingMode, setFacingMode] = useState("user");
+  const [facingMode, setFacingMode] = useState("environment");
 
   const handleSwitchCamera = () => {
     setFacingMode(facingMode == `user` ? `environment` : `user`);
