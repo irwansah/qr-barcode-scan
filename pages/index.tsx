@@ -3,11 +3,20 @@ import { QrReader } from "react-qr-reader_multiformatreader";
 
 const Home = () => {
   const [data, setData] = useState("No result");
-  const [facingMode, setFacingMode] = useState("environtment");
 
   function handleFace(): void {
-    setFacingMode(facingMode == "environtment" ? "user" : "environtment");
+    localStorage.setItem(
+      "facing",
+      localStorage.getItem("facing") == "environtment" ? "user" : "environtment"
+    );
+    location.reload();
   }
+
+  useEffect(() => {
+    if (localStorage.getItem("facing") == null) {
+      localStorage.setItem("facing", "environtment");
+    }
+  }, []);
 
   return (
     <>
@@ -16,7 +25,8 @@ const Home = () => {
           <p className="relative bg-black rounded-lg p-3 text-center border w-full mb-3">
             {data}
           </p>
-          {facingMode == "environtment" ? (
+          {typeof localStorage !== "undefined" &&
+          localStorage.getItem("facing") == "environtment" ? (
             <QrReader
               constraints={{
                 facingMode: "environment",
@@ -58,7 +68,9 @@ const Home = () => {
             />
           )}
           <p className="relative bg-black rounded-lg p-3 text-center w-full mb-3">
-            <button onClick={() => handleFace()}>Switch</button>
+            <button onClick={() => handleFace()}>
+              Switch
+            </button>
           </p>
         </div>
       </div>
