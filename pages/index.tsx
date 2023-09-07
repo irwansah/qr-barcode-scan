@@ -3,6 +3,7 @@ import { QrReader } from "react-qr-reader_multiformatreader";
 
 const Home = () => {
   const [data, setData] = useState("No result");
+  const [mirror, setMirror] = useState<string>("");
 
   function handleFace(): void {
     localStorage.setItem(
@@ -18,6 +19,10 @@ const Home = () => {
     }
   }, []);
 
+  function handleMirror(): void {
+    setMirror(mirror == "environtment" ? "user" : "environtment");
+  }
+
   return (
     <>
       <div className="flex justify-center min-h-screen items-center place-items-center ">
@@ -29,7 +34,7 @@ const Home = () => {
           localStorage.getItem("facing") == "environtment" ? (
             <QrReader
               constraints={{
-                facingMode: "environment",
+                facingMode: mirror??"environtment",
                 width: { ideal: 1280 },
                 height: { ideal: 720 },
               }}
@@ -49,7 +54,7 @@ const Home = () => {
           ) : (
             <QrReader
               constraints={{
-                facingMode: "user",
+                facingMode: mirror??"user",
                 width: { ideal: 1280 },
                 height: { ideal: 720 },
               }}
@@ -67,9 +72,18 @@ const Home = () => {
               className="rounded-lg overflow-hidden"
             />
           )}
-          <p className="relative bg-black rounded-lg p-3 text-center w-full mb-3">
-            <button onClick={() => handleFace()}>
+          <p className="relative flex gap-2 justify-center bg-black rounded-lg p-3 text-center w-full mb-3">
+            <button
+              onClick={() => handleFace()}
+              className="border p-2 rounded-lg"
+            >
               Switch
+            </button>
+            <button
+              onClick={() => handleMirror()}
+              className="border p-2 rounded-lg"
+            >
+              Mirror
             </button>
           </p>
         </div>
