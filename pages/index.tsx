@@ -38,7 +38,8 @@ const Home = () => {
               <QrReader
                 constraints={{
                   facingMode: mirrorEnv,
-                  
+                  width: { ideal: 1280 },
+                  height: { ideal: 720 },
                 }}
                 onResult={(result: any, error) => {
                   if (result) {
@@ -57,7 +58,8 @@ const Home = () => {
               <QrReader
                 constraints={{
                   facingMode: mirrorUser,
-                 
+                  width: { ideal: 1280 },
+                  height: { ideal: 720 },
                 }}
                 onResult={(result: any, error) => {
                   if (result) {
