@@ -3,7 +3,7 @@ import { QrReader } from "react-qr-reader_multiformatreader";
 
 const Home = () => {
   const [data, setData] = useState("No result");
-  const [facingMode, setFacing] = useState<string>("environment");
+  const [facingMode, setFacing] = useState<string>("");
 
   const handleSwitchCamera = () => {
     localStorage.setItem(
