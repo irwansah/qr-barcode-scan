@@ -3,7 +3,8 @@ import { QrReader } from "react-qr-reader_multiformatreader";
 
 const Home = () => {
   const [data, setData] = useState("No result");
-  const [mirror, setMirror] = useState<string>("");
+  const [mirrorEnv, setMirrorEnv] = useState<string>("environtment");
+  const [mirrorUser, setMirrorUser] = useState<string>("user");
 
   function handleFace(): void {
     localStorage.setItem(
@@ -20,7 +21,8 @@ const Home = () => {
   }, []);
 
   function handleMirror(): void {
-    setMirror(mirror == "environtment" ? "user" : "environtment");
+    setMirrorEnv(mirrorEnv == "environtment" ? "user" : "environtment");
+    setMirrorUser(mirrorEnv == "user" ? "environtment" : "user");
   }
 
   return (
@@ -34,7 +36,7 @@ const Home = () => {
           localStorage.getItem("facing") == "environtment" ? (
             <QrReader
               constraints={{
-                facingMode: mirror??"environtment",
+                facingMode: mirrorEnv,
                 width: { ideal: 1280 },
                 height: { ideal: 720 },
               }}
@@ -54,7 +56,7 @@ const Home = () => {
           ) : (
             <QrReader
               constraints={{
-                facingMode: mirror??"user",
+                facingMode: mirrorUser,
                 width: { ideal: 1280 },
                 height: { ideal: 720 },
               }}
