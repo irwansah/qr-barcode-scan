@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { QrReader } from "react-qr-reader_multiformatreader";
 
 const Home = () => {
   const [data, setData] = useState("No result");
-  const [facingMode, setFacingMode] = useState("environment");
+  const [facingMode, setFacing] = useState<string>("environment");
 
   const handleSwitchCamera = () => {
-    setFacingMode(facingMode == `user` ? `environment` : `user`);
+    localStorage.setItem(
+      "facingMode",
+      localStorage.getItem("facingMode") == `user` ? `environment` : `user`
+    );
+    location.reload();
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("facingMode") == null) {
+      localStorage.setItem("facingMode", "environment");
+    } else {
+      setFacing(localStorage.getItem("facingMode") ?? "environment");
+    }
+  }, []);
 
   return (
     <>
@@ -32,15 +44,16 @@ const Home = () => {
             videoContainerStyle={{ width: "100%" }}
             className="rounded-lg overflow-hidden"
           />
-          <p className="absolute bg-black rounded-lg p-3 md:top-5 top-[20%] left-5">
+          
+        </div>
+        <p className="absolute bg-black rounded-lg p-3 md:top-5 top-[20%]">
             {data}
           </p>
-          <p className="absolute bg-black rounded-lg p-3 md:top-5 top-[20%] right-5">
+          <p className="absolute bg-black rounded-lg p-3 md:bottom-5 bottom-[20%]">
             <button onClick={() => handleSwitchCamera()}>
               Switch {facingMode}
             </button>
           </p>
-        </div>
       </div>
     </>
   );
