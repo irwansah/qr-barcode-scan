@@ -32,7 +32,7 @@ const Home = () => {
           <p className="relative bg-black rounded-lg p-3 text-center border w-full mb-3">
             {data}
           </p>
-          <div className="max-h-[100px] rounded-lg overflow-hidden">
+          <div className="max-h-[200px] rounded-lg overflow-hidden">
             {typeof localStorage !== "undefined" &&
             localStorage.getItem("facing") == "environtment" ? (
               <QrReader
