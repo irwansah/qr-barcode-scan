@@ -22,7 +22,7 @@ const Home = () => {
 
   function handleMirror(): void {
     setMirrorEnv(mirrorEnv == "environtment" ? "user" : "environtment");
-    setMirrorUser(mirrorEnv == "user" ? "environtment" : "user");
+    setMirrorUser(mirrorUser == "user" ? "environtment" : "user");
   }
 
   return (
