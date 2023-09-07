@@ -32,7 +32,7 @@ const Home = () => {
         />
         <p className="absolute z-10 bg-black rounded-lg p-3 top-5">{data}</p>
         <p className="absolute z-10 bg-black rounded-lg p-3 top-5 right-5">
-          <button onClick={() => handleSwitchCamera}>Switch</button>
+          <button onClick={() => handleSwitchCamera()}>Switch {facingMode}</button>
         </p>
       </div>
     </>
